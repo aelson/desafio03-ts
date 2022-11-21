@@ -1,7 +1,7 @@
 const conta = {
-    email: 'nath@dio.bank',
+    email: 'aelson@test',
     password: '123456',
-    name: 'Nathaly Souza',
+    name: 'Aelson Alves',
     balance: 2000.00,
     id: '1'
 }
