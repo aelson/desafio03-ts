@@ -26,21 +26,28 @@ const CFaLock = chakra(FaLock);
 
 const Home = () => {
     const [ email, setEmail ] = useState<string>('')
+    const [ password, setPassword ] = useState<string>('')
     const [ showPassword, setShowPassword ] = useState(false)
     const { setIsLoggedIn } = useContext(AppContext)
     const navigate = useNavigate()
     const handleShowClick = () => setShowPassword(!showPassword);
 
-    const validateUser = async (email: string) => {
-        const loggedIn = await login(email)
+    const validateUser = async ({
+      email,
+      password,
+    }:{ 
+      email: string,
+      password: string,
+    }) => {
+      const loggedIn = await login({ email, password })
 
-        if(!loggedIn){
-            return alert('Email inválido')
-        }
+      if(!loggedIn){
+          return alert('Credenciais inválidas')
+      }
 
-        setIsLoggedIn(true)
-        changeLocalStorage({ login: true })
-        navigate('/conta/1')
+      setIsLoggedIn(true)
+      changeLocalStorage({ login: true })
+      navigate('/conta/1')
     }
   
     return (
@@ -87,6 +94,7 @@ const Home = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
+                    onChange={(event) => setPassword(event.target.value)}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -104,7 +112,7 @@ const Home = () => {
                 variant="solid"
                 colorScheme="teal"
                 width="full"
-                onClick={() => validateUser(email)}
+                onClick={() => validateUser({ email, password })}
               >
                 Login
               </Button>
