@@ -20,6 +20,7 @@ import { AppContext } from "../components/AppContext";
 import { login } from "../services/login";
 import { changeLocalStorage } from "../services/storage";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { api } from "../api";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -47,8 +48,9 @@ const Home = () => {
           return alert('Credenciais inválidas')
       }
 
+      const data: any = await api
       setIsLoggedIn(true)
-      changeLocalStorage({ login: true })
+      changeLocalStorage({ login: true, user: data })
       navigate('/conta/1')
     }
   
