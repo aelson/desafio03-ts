@@ -28,9 +28,11 @@ const Home = () => {
     const [ email, setEmail ] = useState<string>('')
     const [ password, setPassword ] = useState<string>('')
     const [ showPassword, setShowPassword ] = useState(false)
-    const { setIsLoggedIn } = useContext(AppContext)
+    const { isLoggedIn, setIsLoggedIn } = useContext(AppContext)
     const navigate = useNavigate()
     const handleShowClick = () => setShowPassword(!showPassword);
+
+    isLoggedIn && navigate('/conta/1')
 
     const validateUser = async ({
       email,
